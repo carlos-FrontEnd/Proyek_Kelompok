@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           AnimeListView(filteredAnime: filteredAnime),
