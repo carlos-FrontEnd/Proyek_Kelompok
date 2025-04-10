@@ -3,23 +3,60 @@ import 'package:home/data/person.dart';
 
 class AnimeListView extends StatelessWidget {
   final List<Person> filteredAnime;
-
   const AnimeListView({super.key, required this.filteredAnime});
 
   @override
   Widget build(BuildContext context) {
     final filteredList =
+        // recomended filter
         filteredAnime.where((anime) => anime.view > 100).toList();
 
-    return SizedBox(
-      height: 200,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: filteredList.length,
-        itemBuilder: (context, index) {
-          final anime = filteredList[index];
-          return AnimeCard(anime: anime);
-        },
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
+      color: Color.fromRGBO(255, 255, 255, 1),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  'Mangatsu adalah aplikasi situs manga yang menyediakan berbagai manga yang cukup populer saat ini dan juga manga yang sudah lama tayang.',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const SizedBox(width: 5),
+              const Text(
+                'Baca Maanga Terpopuler saat ini',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 130,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: filteredList.length,
+              itemBuilder: (context, index) {
+                final anime = filteredList[index];
+                return AnimeCard(anime: anime);
+              },
+            ),
+          ),
+          const SizedBox(height: 100),
+        ],
       ),
     );
   }
@@ -33,50 +70,61 @@ class AnimeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 120,
+      width: 150,
       child: Card(
         elevation: 4,
-        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Container(
-          padding: const EdgeInsets.all(5),
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  image: DecorationImage(
-                    image: NetworkImage(anime.image),
-                    fit: BoxFit.cover,
+              Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(anime.image),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    child: Container(
+                      color: Colors.black54,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 2,
+                      ),
+                      child: Text(
+                        anime.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
               Center(
                 child: Text(
-                  anime.title,
+                  'chapter ' + anime.chapter.toString(),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis,
                   ),
                   maxLines: 1,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Center(
-                child: Text(
-                  'Chapters: ${anime.chapter}',
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ),
-              Center(
-                child: Text(
-                  'Rating: ${anime.rating}',
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
             ],
@@ -86,56 +134,3 @@ class AnimeCard extends StatelessWidget {
     );
   }
 }
-
-    // return Card(
-    //   elevation: 4,
-    //   margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-    //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    //   child: Container(
-    //     width: 120,
-    //     padding: const EdgeInsets.all(5),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         Container(
-    //           width: 100,
-    //           height: 100,
-    //           decoration: BoxDecoration(
-    //             borderRadius: BorderRadius.circular(8.0),
-    //             image:
-    //                 anime.image.isNotEmpty
-    //                     ? DecorationImage(
-    //                       image: NetworkImage(anime.image),
-    //                       fit: BoxFit.cover,
-    //                     )
-    //                     : null,
-    //             color: anime.image.isEmpty ? Colors.grey : null,
-    //           ),
-    //           child:
-    //               anime.image.isEmpty
-    //                   ? const Icon(Icons.broken_image, color: Colors.white)
-    //                   : null,
-    //         ),
-    //         const SizedBox(height: 8),
-    //         Text(
-    //           anime.title,
-    //           style: const TextStyle(
-    //             fontSize: 14,
-    //             fontWeight: FontWeight.bold,
-    //             overflow: TextOverflow.ellipsis,
-    //           ),
-    //           maxLines: 1,
-    //         ),
-    //         const SizedBox(height: 4),
-    //         Text(
-    //           'Chapters: ${anime.chapter}',
-    //           style: const TextStyle(fontSize: 12, color: Colors.grey),
-    //         ),
-    //         Text(
-    //           'Rating: ${anime.rating}',
-    //           style: const TextStyle(fontSize: 12, color: Colors.grey),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
