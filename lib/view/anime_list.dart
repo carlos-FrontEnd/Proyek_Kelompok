@@ -11,53 +11,56 @@ class AnimeListView extends StatelessWidget {
         // recomended filter
         filteredAnime.where((anime) => anime.view > 100).toList();
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
-      color: Color.fromRGBO(255, 255, 255, 1),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const SizedBox(width: 5),
-              Expanded(
-                child: Text(
-                  'Mangatsu adalah aplikasi situs manga yang menyediakan berbagai manga yang cukup populer saat ini dan juga manga yang sudah lama tayang.',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w800,
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const SizedBox(width: 5),
+            Expanded(
+              child: Text(
+                'Mangatsu adalah aplikasi situs manga yang menyediakan berbagai manga yang cukup populer saat ini dan juga manga yang sudah lama tayang.',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800,
                 ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const SizedBox(width: 5),
-              const Text(
-                'Baca Maanga Terpopuler saat ini',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 130,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: filteredList.length,
-              itemBuilder: (context, index) {
-                final anime = filteredList[index];
-                return AnimeCard(anime: anime);
-              },
             ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            const SizedBox(width: 5),
+            const Text(
+              'Baca Maanga Terpopuler saat ini',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        Container(
+          width: double.infinity,
+          height: 1,
+          color: Color.fromRGBO(255, 117, 117, 1),
+        ),
+        SizedBox(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          height: 130,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: filteredList.length,
+            itemBuilder: (context, index) {
+              final anime = filteredList[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: AnimeCard(anime: anime),
+              );
+            },
           ),
-          const SizedBox(height: 100),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
