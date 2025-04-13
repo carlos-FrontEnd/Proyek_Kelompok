@@ -1,4 +1,4 @@
-class Person {
+class Anime {
   int id;
   String title;
   double rating;
@@ -11,7 +11,7 @@ class Person {
   int likes;
   int view;
 
-  Person({
+  Anime({
     required this.id,
     required this.title,
     required this.rating,
