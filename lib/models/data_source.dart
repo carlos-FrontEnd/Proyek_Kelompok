@@ -1,9 +1,9 @@
-import 'person.dart';
+import 'package:home/models/anime_model.dart';
 
-class DataCard {
-  List<Person> getAnime() {
+class AnimeDataSource {
+  List<Anime> getAnime() {
     return [
-      Person(
+      Anime(
         id: 1,
         title: 'Kimetsu No Yaiba',
         rating: 9.2,
@@ -16,7 +16,7 @@ class DataCard {
         sinopsis: 'Tanjiro merupakan anak sulung dari keluarga yang kehilangan ayahnya...',
         author: 'GOTOUGE Koyoharu',
       ),
-      Person(
+      Anime(
         id: 2,
         title: 'One Piece',
         rating: 9.7,
@@ -29,7 +29,7 @@ class DataCard {
         sinopsis: 'Bercerita tentang seorang laki-laki bernama Monkey D. Luffy...',
         author: 'Oda Eichiro',
       ),
-      Person(
+      Anime(
         id: 3,
         title: 'Ruri Dragon',
         rating: 8.5,
@@ -42,7 +42,7 @@ class DataCard {
         sinopsis: 'Pembunuh bayaran Juzo Ogami dikenal sebagai legenda di dunia hitam...',
         author: 'FUJIMAKI Tadatoshi',
       ),
-      Person(
+      Anime(
         id: 4,
         title: 'Kill Blue',
         rating: 8.3,
@@ -55,7 +55,7 @@ class DataCard {
         sinopsis: 'Pembunuh bayaran Juzo Ogami dikenal sebagai legenda di dunia hitam...',
         author: 'FUJIMAKI Tadatoshi',
       ),
-      Person(
+      Anime(
         id: 5,
         title: 'Komi-san wa Komyushou Desu',
         rating: 8.8,
@@ -68,7 +68,7 @@ class DataCard {
         sinopsis: 'Komi-san adalah gadis cantik dan mengagumkan...',
         author: 'Oda Tomohito',
       ),
-      Person(
+      Anime(
         id: 6,
         title: 'Plunderer',
         rating: 8.4,
@@ -81,7 +81,7 @@ class DataCard {
         sinopsis: 'Tahun 305 Kalender Alcian, dan dunia saat ini dikendalikan oleh "Numbers"...',
         author: 'Minazuki Zuu',
       ),
-      Person(
+      Anime(
         id: 7,
         title: 'Nidome no Jinsei wo Isekai de',
         rating: 8.1,
@@ -94,7 +94,7 @@ class DataCard {
         sinopsis: 'Kunugi Renya merupakan sosok yang sudah tiada di usia tuanya...',
         author: 'Main',
       ),
-      Person(
+      Anime(
         id: 8,
         title: 'Sekai Ni Hitori, Zenzokusei Mahou no Tsukaite',
         rating: 8.0,
@@ -107,7 +107,7 @@ class DataCard {
         sinopsis: 'Setelah kecelakaan lalu lintas, Zenichi Kiyama bereinkarnasi...',
         author: 'Katanakaji',
       ),
-      Person(
+      Anime(
         id: 9,
         title: 'Isekai de Slow Life wo (Ganbou)',
         rating: 7.9,
@@ -120,7 +120,7 @@ class DataCard {
         sinopsis: 'Dengan kehendak sang dewi, Itsuki shinomiya diberi hak istimewa...',
         author: 'Shige',
       ),
-      Person(
+      Anime(
         id: 10,
         title: 'Exorcist wo Otosenai',
         rating: 8.2,
