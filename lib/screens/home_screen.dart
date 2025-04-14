@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:home/widgets/description_manga.dart';
+import 'package:home/widgets/recomendedCarousel.dart';
 import 'package:provider/provider.dart';
 import '../providers/anime_providers.dart';
 import '../widgets/anime_grid.dart';
@@ -133,8 +135,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
+
+                    SizedBox(height: 30),
+                    Recomendedcarousel(animeList: animeProvider.recommended),
+                    const SizedBox(height: 20),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
                     SectionHeader(title: 'Trending Now', onViewAll: () {}),
                     HorizontalList(animeList: animeProvider.animeList),
+                    DescriptionManga(
+                      title: 'Mangatsu - Baca Manga',
+                      description:
+                          'Komiku merupakan situs baca  manga online gratis dan terlengkap di Indonesia. Mangaindo adalah situs baca manga online gratis dan terlengkap di Indonesia dan tentu juga iklan yang tidak mengganggu para pembaca .',
+                    ),
                     SectionHeader(title: 'Ongoing Anime', onViewAll: () {}),
                     AnimeGrid(animeList: animeProvider.ongoingAnime),
                     SectionHeader(title: 'Completed Stories', onViewAll: () {}),

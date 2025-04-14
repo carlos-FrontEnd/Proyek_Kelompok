@@ -16,6 +16,12 @@ class AnimeProvider with ChangeNotifier {
   List<Anime> get ongoingAnime =>
       _animeList.where((anime) => anime.status == 'Ongoing').toList();
 
+  List<Anime> get recommended {
+    final sortedList = List<Anime>.from(_animeList)
+      ..sort((a, b) => b.rating.compareTo(a.rating));
+    return sortedList.take(5).toList();
+  }
+
   List<Anime> get completedAnime =>
       _animeList.where((anime) => anime.status == 'Completed').toList();
 
@@ -35,13 +41,16 @@ class AnimeProvider with ChangeNotifier {
     if (query.isEmpty) {
       _filteredAnime = _animeList;
     } else {
-      _filteredAnime = _animeList.where((anime) {
-        final titleMatch = anime.title.toLowerCase().contains(query.toLowerCase());
-        final genreMatch = anime.genre.any(
-          (genre) => genre.toLowerCase().contains(query.toLowerCase()),
-        );
-        return titleMatch || genreMatch;
-      }).toList();
+      _filteredAnime =
+          _animeList.where((anime) {
+            final titleMatch = anime.title.toLowerCase().contains(
+              query.toLowerCase(),
+            );
+            final genreMatch = anime.genre.any(
+              (genre) => genre.toLowerCase().contains(query.toLowerCase()),
+            );
+            return titleMatch || genreMatch;
+          }).toList();
     }
     notifyListeners();
   }

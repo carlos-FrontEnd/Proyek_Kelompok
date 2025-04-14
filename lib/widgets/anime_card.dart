@@ -31,9 +31,8 @@ class AnimeCard extends StatelessWidget {
                     anime.image,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.error),
+                    errorBuilder: (context, error, stackTrace) => const Center(
+                      child: Icon(Icons.error, color: Colors.red),
                     ),
                   ),
                 ),
