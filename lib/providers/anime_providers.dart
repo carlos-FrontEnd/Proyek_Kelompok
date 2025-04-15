@@ -15,7 +15,6 @@ class AnimeProvider with ChangeNotifier {
 
   List<Anime> get ongoingAnime =>
       _animeList.where((anime) => anime.status == 'Ongoing').toList();
-
   List<Anime> get recommended {
     final sortedList = List<Anime>.from(_animeList)
       ..sort((a, b) => b.rating.compareTo(a.rating));
@@ -24,6 +23,19 @@ class AnimeProvider with ChangeNotifier {
 
   List<Anime> get completedAnime =>
       _animeList.where((anime) => anime.status == 'Completed').toList();
+  List<Anime> get topRatedAndMostViewedAnime {
+    final combinedList = List<Anime>.from(_animeList);
+    combinedList.sort((a, b) {
+      final ratingComparison = b.rating.compareTo(a.rating);
+      if (ratingComparison != 0) {
+    return ratingComparison;
+      }
+      return b.view.compareTo(a.view);
+    });
+    return combinedList.take(10).toList();
+  }
+
+
 
   Future<void> loadAnimeData() async {
     _isLoading = true;

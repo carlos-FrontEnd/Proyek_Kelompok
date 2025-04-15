@@ -12,7 +12,7 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final animeProvider = Provider.of<AnimeProvider>(context);
     final totalChapters = anime.chapter;
-    final chaptersPerPage = 9; // 3x3 grid per page
+    const chaptersPerPage = 9; // 3x3 grid per page
     final pageCount = (totalChapters / chaptersPerPage).ceil();
 
     return Scaffold(
@@ -61,41 +61,10 @@ class DetailScreen extends StatelessWidget {
                   const SizedBox(height: 24),
                   _buildChapterListHeader(),
                   const SizedBox(height: 12),
-                  SizedBox(
-                    height: 140, // Fixed height for the PageView
-                    child: PageView.builder(
-                      controller: PageController(viewportFraction: 0.9),
-                      padEnds: false,
-                      itemCount: pageCount,
-                      itemBuilder: (context, pageIndex) {
-                        final startChapter = pageIndex * chaptersPerPage + 1;
-                        final endChapter = (startChapter + chaptersPerPage - 1)
-                            .clamp(1, totalChapters);
-
-                        return Card(
-                          elevation: 2,
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 8,
-                                    mainAxisSpacing: 10,
-                                    childAspectRatio: 3.5,
-                                  ),
-                              itemCount: endChapter - startChapter + 1,
-                              itemBuilder: (context, index) {
-                                final chapterNumber = startChapter + index;
-                                return _buildChapterCard(chapterNumber);
-                              },
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                  _buildChapterPageView(
+                    pageCount,
+                    chaptersPerPage,
+                    totalChapters,
                   ),
                 ],
               ),
@@ -148,6 +117,50 @@ class DetailScreen extends StatelessWidget {
     return const Text(
       'Chapters',
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _buildChapterPageView(
+    int pageCount,
+    int chaptersPerPage,
+    int totalChapters,
+  ) {
+    return SizedBox(
+      height: 140, // Fixed height for the PageView
+      child: PageView.builder(
+        controller: PageController(viewportFraction: 0.9),
+        padEnds: false,
+        itemCount: pageCount,
+        itemBuilder: (context, pageIndex) {
+          final startChapter = pageIndex * chaptersPerPage + 1;
+          final endChapter = (startChapter + chaptersPerPage - 1).clamp(
+            1,
+            totalChapters,
+          );
+
+          return Card(
+            elevation: 2,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 3.5,
+                ),
+                itemCount: endChapter - startChapter + 1,
+                itemBuilder: (context, index) {
+                  final chapterNumber = startChapter + index;
+                  return _buildChapterCard(chapterNumber);
+                },
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 

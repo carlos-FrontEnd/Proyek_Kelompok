@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home/widgets/description_manga.dart';
 import 'package:home/widgets/recomendedCarousel.dart';
+import 'package:home/widgets/scrollSnap.dart';
+import 'package:home/widgets/section_header_completed.dart';
 import 'package:provider/provider.dart';
 import '../providers/anime_providers.dart';
 import '../widgets/anime_grid.dart';
@@ -151,6 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     AnimeGrid(animeList: animeProvider.ongoingAnime),
                     SectionHeader(title: 'Completed Stories', onViewAll: () {}),
                     AnimeGrid(animeList: animeProvider.completedAnime),
+                    SectionHeaderCompleted(title: 'Top Binged Series'),
+                    AnimeSlideList(
+                      animeList: animeProvider.topRatedAndMostViewedAnime,
+                    ),
                   ],
                 ),
               ),
