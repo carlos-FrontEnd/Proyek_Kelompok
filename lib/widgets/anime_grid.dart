@@ -15,9 +15,9 @@ class AnimeGrid extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         childAspectRatio: 0.6,
-        mainAxisSpacing: 12,
+        mainAxisSpacing: 10,
         crossAxisSpacing: 12,
       ),
       itemCount: animeList.length,

@@ -83,6 +83,7 @@ class Recomendedcarousel extends StatelessWidget {
                 )
                 .toList(),
         options: CarouselOptions(
+          viewportFraction: 0.95,
           autoPlay: true,
           aspectRatio: 2.0,
           enlargeCenterPage: true,

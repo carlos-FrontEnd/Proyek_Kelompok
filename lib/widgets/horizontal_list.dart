@@ -5,7 +5,6 @@ import 'anime_card.dart';
 
 class HorizontalList extends StatelessWidget {
   final List<Anime> animeList;
-
   const HorizontalList({super.key, required this.animeList});
 
   @override
