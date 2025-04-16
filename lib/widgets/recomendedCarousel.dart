@@ -40,21 +40,26 @@ class Recomendedcarousel extends StatelessWidget {
                                 ),
                               ),
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0,
-                                vertical: 10.0,
+                                horizontal: 10.0,
+                                vertical: 5.0,
                               ),
                               child: Stack(
                                 children: <Widget>[
+                                  Container(
+                                    margin: const EdgeInsets.only(bottom: 10.0),
+                                    color: Color.fromARGB(100, 132, 132,131),
+                                    width: 1000.0,
+                                    height: 30,
+                                  ),
                                   Text(
-                                    item.title,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    item.title
+                                    .split(" ")
+                                    .take(3).join(" "),
+                                    style: TextStyle(fontFamily: 'GreatVibes', fontWeight: FontWeight.bold, color:Colors.white, fontSize: 20.0)
                                   ),
                                   Positioned(
                                     right: 0.0,
+                                    top: 5.0,
                                     child: Row(
                                       children: <Widget>[
                                         const Icon(
@@ -69,6 +74,12 @@ class Recomendedcarousel extends StatelessWidget {
                                             color: Colors.white,
                                           ),
                                         ),
+                                        const SizedBox(width: 5.0),
+                                        Text(
+                                          'Ch. ${item.chapter}',
+                                          style: const TextStyle(
+                                            color: Colors.white,)
+                                        )
                                       ],
                                     ),
                                   ),

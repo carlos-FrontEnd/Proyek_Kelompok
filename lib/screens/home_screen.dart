@@ -115,7 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
             Container(
-              color: const Color(0xFF1A1A1A),
               child: IconButton(
                 icon: const Icon(Icons.person, color: Colors.white),
                 onPressed: () {
@@ -136,12 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 8),
+
 
                     SizedBox(height: 30),
                     Recomendedcarousel(animeList: animeProvider.recommended),
-                    const SizedBox(height: 20),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
                     SectionHeader(title: 'Trending Now', onViewAll: () {}),
                     HorizontalList(animeList: animeProvider.animeList),
                     DescriptionManga(
