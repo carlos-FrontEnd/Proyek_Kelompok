@@ -22,7 +22,7 @@ class DescriptionManga extends StatelessWidget {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-           Divider(color: Colors.grey, thickness: 1, height: 1),
+          const Divider(color: Colors.grey, thickness: 1),
           Text(
             description,
             style: const TextStyle(fontSize: 16, color: Colors.grey),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home/widgets/description_manga.dart';
-import 'package:home/widgets/recomended_carousel.dart';
-import 'package:home/widgets/scroll_snap.dart';
+import 'package:home/widgets/recomendedCarousel.dart';
+import 'package:home/widgets/scrollSnap.dart';
 import 'package:home/widgets/section_header_completed.dart';
 import 'package:provider/provider.dart';
 import '../providers/anime_providers.dart';
 import '../widgets/anime_grid.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/section_header.dart';
-import 'Profile_account.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black26,
+        backgroundColor: Colors.black,
         leading: Builder(
           builder:
               (context) => IconButton(
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: const TextStyle(color: Colors.white),
                       )
                       : const Text(
-                        'Angatsu',
+                        'Anime App',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -115,17 +114,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ],
-            IconButton(
-              icon: const Icon(Icons.person, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => const ProfileAccount(), // Tambahkan const
-                  ),
-                );
-              },
+            Container(
+              child: IconButton(
+                icon: const Icon(Icons.person, color: Colors.white),
+                onPressed: () {
+                  // Navigate to profile or settings screen
+                },
+              ),
             ),
           ],
         ),
@@ -140,6 +135,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+
                     SizedBox(height: 30),
                     Recomendedcarousel(animeList: animeProvider.recommended),
                     SectionHeader(title: 'Trending Now', onViewAll: () {}),
