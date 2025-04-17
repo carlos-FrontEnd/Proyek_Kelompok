@@ -5,7 +5,6 @@ import '../models/anime_model.dart';
 
 class DetailScreen extends StatelessWidget {
   final Anime anime;
-
   const DetailScreen({super.key, required this.anime});
 
   @override
