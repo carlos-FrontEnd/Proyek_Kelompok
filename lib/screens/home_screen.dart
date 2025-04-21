@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home/widgets/description_manga.dart';
 import 'package:home/widgets/recomended_carousel.dart';
 import 'package:home/widgets/scroll_snap.dart';
@@ -50,24 +50,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black26,
+        backgroundColor: const Color.fromARGB(255, 0, 123, 255),
+        toolbarHeight: 70,
         leading: Builder(
           builder:
               (context) => IconButton(
-                icon: const Icon(Icons.menu, color: Colors.white),
+                icon: const Icon(Icons.menu, color: Colors.white, size: 30),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
         ),
+        toolbarOpacity: 0.8,
+        shadowColor: Colors.grey,
         title: Row(
           children: [
-            Container(
-              color: const Color(0xFF0C112E),
-              child: SvgPicture.asset(
-                'assets/vector.svg',
-                width: 30,
-                height: 30,
-              ),
-            ),
             const SizedBox(width: 5),
             Expanded(
               child:
@@ -95,12 +90,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         style: const TextStyle(color: Colors.white),
                       )
-                      : const Text(
-                        'Angatsu',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                      : Container(
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/img/mangatsu.png',
+                              width: 50,
+                              height: 60,
+                            ),
+                            Text(
+                              'angatsu',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
             ),
@@ -121,8 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) => const ProfileAccount(), // Tambahkan const
+                    builder: (context) => const ProfileAccount(),
                   ),
                 );
               },

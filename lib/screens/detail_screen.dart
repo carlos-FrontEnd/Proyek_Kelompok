@@ -11,7 +11,7 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final animeProvider = Provider.of<AnimeProvider>(context);
     final totalChapters = anime.chapter;
-    const chaptersPerPage = 9; // 3x3 grid per page
+    const chaptersPerPage = 9; //per page 3 * 3 
     final pageCount = (totalChapters / chaptersPerPage).ceil();
 
     return Scaffold(
@@ -169,7 +169,6 @@ class DetailScreen extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(4),
         onTap: () {
-          // Handle chapter tap
           debugPrint('Chapter $chapterNumber tapped');
         },
         child: Center(

@@ -12,12 +12,7 @@ class ContainerListTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.only(
-          top: 10,
-          bottom: 10,
-          left: 15,
-          right: 15,
-        ),
+        padding: const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 5),
         decoration: BoxDecoration(
           color: Colors.black12,
           borderRadius: BorderRadius.circular(8),
