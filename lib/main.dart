@@ -11,7 +11,7 @@ final ThemeData lightTheme = ThemeData(
     primary: Colors.blue,
     secondary: Colors.blueAccent,
   ),
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.white,//ini
   textTheme: const TextTheme(
     bodyLarge: TextStyle(color: Colors.black),
     bodyMedium: TextStyle(color: Colors.black87),
