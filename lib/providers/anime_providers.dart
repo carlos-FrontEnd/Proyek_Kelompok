@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/anime_model.dart';
 import '../models/data_source.dart';
 
+
 class AnimeProvider with ChangeNotifier {
   List<Anime> _animeList = [];
   List<Anime> _filteredAnime = [];
@@ -20,7 +21,6 @@ class AnimeProvider with ChangeNotifier {
       ..sort((a, b) => b.rating.compareTo(a.rating));
     return sortedList.take(5).toList();
   }
-
   List<Anime> get completedAnime =>
       _animeList.where((anime) => anime.status == 'Completed').toList();
   List<Anime> get topRatedAndMostViewedAnime {
@@ -28,14 +28,12 @@ class AnimeProvider with ChangeNotifier {
     combinedList.sort((a, b) {
       final ratingComparison = b.rating.compareTo(a.rating);
       if (ratingComparison != 0) {
-    return ratingComparison;
+        return ratingComparison;
       }
       return b.view.compareTo(a.view);
     });
-    return combinedList.take(10).toList();
+    return combinedList.toList();
   }
-
-
 
   Future<void> loadAnimeData() async {
     _isLoading = true;

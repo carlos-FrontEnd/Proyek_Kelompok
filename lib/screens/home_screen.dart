@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home/widgets/description_manga.dart';
-import 'package:home/widgets/recomendedCarousel.dart';
-import 'package:home/widgets/scrollSnap.dart';
+import 'package:home/widgets/recomended_carousel.dart';
+import 'package:home/widgets/scroll_snap.dart';
 import 'package:home/widgets/section_header_completed.dart';
 import 'package:provider/provider.dart';
 import '../providers/anime_providers.dart';
 import '../widgets/anime_grid.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/section_header.dart';
+import 'Profile_account.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,24 +50,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 0, 123, 255),
+        toolbarHeight: 70,
         leading: Builder(
           builder:
               (context) => IconButton(
-                icon: const Icon(Icons.menu, color: Colors.white),
+                icon: const Icon(Icons.menu, color: Colors.white, size: 30),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
         ),
+        toolbarOpacity: 0.8,
+        shadowColor: Colors.grey,
         title: Row(
           children: [
-            Container(
-              color: const Color(0xFF0C112E),
-              child: SvgPicture.asset(
-                'assets/vector.svg',
-                width: 30,
-                height: 30,
-              ),
-            ),
             const SizedBox(width: 5),
             Expanded(
               child:
@@ -94,12 +90,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         style: const TextStyle(color: Colors.white),
                       )
-                      : const Text(
-                        'Anime App',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                      : Container(
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/img/mangatsu.png',
+                              width: 50,
+                              height: 60,
+                            ),
+                            Text(
+                              'angatsu',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
             ),
@@ -114,13 +121,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ],
-            Container(
-              child: IconButton(
-                icon: const Icon(Icons.person, color: Colors.white),
-                onPressed: () {
-                  // Navigate to profile or settings screen
-                },
-              ),
+            IconButton(
+              icon: const Icon(Icons.person, color: Colors.white),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileAccount(),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -135,8 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-
                     SizedBox(height: 30),
                     Recomendedcarousel(animeList: animeProvider.recommended),
                     SectionHeader(title: 'Trending Now', onViewAll: () {}),

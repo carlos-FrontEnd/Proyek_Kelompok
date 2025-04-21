@@ -10,31 +10,36 @@ class AnimeGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.6,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 12,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final crossAxisCount = screenWidth > 700 ? 5 : 2;
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.7,
+        ),
+        itemCount: animeList.length,
+        itemBuilder: (context, index) {
+          final anime = animeList[index];
+          return AnimeCard(
+            anime: anime,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(anime: anime),
+                ),
+              );
+            },
+          );
+        },
       ),
-      itemCount: animeList.length,
-      itemBuilder: (context, index) {
-        final anime = animeList[index];
-        return AnimeCard(
-          anime: anime,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailScreen(anime: anime),
-              ),
-            );
-          },
-        );
-      },
     );
   }
 }
