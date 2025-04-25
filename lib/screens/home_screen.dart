@@ -146,21 +146,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 30),
-                    Recomendedcarousel(animeList: animeProvider.recommended),
+                    RecomendedCarousel(animeList: animeProvider.recommended),
                     SectionHeader(title: 'Trending Now', onViewAll: () {}),
-                    HorizontalList(animeList: animeProvider.animeList),
+                    HorizontalList(
+                      animeList: animeProvider.animeList.take(10).toList(),
+                    ),
                     DescriptionManga(
                       title: 'Mangatsu - Baca Manga',
                       description:
                           'Komiku merupakan situs baca  manga online gratis dan terlengkap di Indonesia. Mangaindo adalah situs baca manga online gratis dan terlengkap di Indonesia dan tentu juga iklan yang tidak mengganggu para pembaca .',
                     ),
                     SectionHeader(title: 'Ongoing Anime', onViewAll: () {}),
-                    AnimeGrid(animeList: animeProvider.ongoingAnime),
+                    AnimeGrid(
+                      animeList: animeProvider.ongoingAnime.take(7).toList(),
+                    ),
                     SectionHeader(title: 'Completed Stories', onViewAll: () {}),
-                    AnimeGrid(animeList: animeProvider.completedAnime),
+                    AnimeGrid(
+                      animeList: animeProvider.completedAnime.take(6).toList(),
+                    ),
                     SectionHeaderCompleted(title: 'Top Binged Series'),
                     AnimeSlideList(
-                      animeList: animeProvider.topRatedAndMostViewedAnime,
+                      animeList:
+                          animeProvider.topRatedAndMostViewedAnime
+                              .take(9)
+                              .toList(),
+                    ),
+
+                    SectionHeader(title: 'Romance Stories', onViewAll: () {}),
+                    HorizontalList(
+                      animeList: animeProvider.findAnimeByGenre("Romance"),
                     ),
                   ],
                 ),

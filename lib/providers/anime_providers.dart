@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import '../models/anime_model.dart';
 import '../models/data_source.dart';
 
-
 class AnimeProvider with ChangeNotifier {
   List<Anime> _animeList = [];
   List<Anime> _filteredAnime = [];
-  List<Anime> _favorites = [];
+  final List<Anime> _favorites = [];
   bool _isLoading = false;
 
   List<Anime> get animeList => _animeList;
@@ -21,6 +20,7 @@ class AnimeProvider with ChangeNotifier {
       ..sort((a, b) => b.rating.compareTo(a.rating));
     return sortedList.take(5).toList();
   }
+
   List<Anime> get completedAnime =>
       _animeList.where((anime) => anime.status == 'Completed').toList();
   List<Anime> get topRatedAndMostViewedAnime {
@@ -33,6 +33,11 @@ class AnimeProvider with ChangeNotifier {
       return b.view.compareTo(a.view);
     });
     return combinedList.toList();
+  }
+
+  // Di AnimeProvider
+  List<Anime> findAnimeByGenre(String genre) {
+    return _animeList.where((anime) => anime.genre.contains(genre)).toList();
   }
 
   Future<void> loadAnimeData() async {
@@ -60,6 +65,20 @@ class AnimeProvider with ChangeNotifier {
               (genre) => genre.toLowerCase().contains(query.toLowerCase()),
             );
             return titleMatch || genreMatch;
+          }).toList();
+    }
+    notifyListeners();
+  }
+
+  void genre(String genre) {
+    if (genre.isEmpty) {
+      _filteredAnime = _animeList;
+    } else {
+      _filteredAnime =
+          _animeList.where((anime) {
+            return anime.genre.any(
+              (g) => g.toLowerCase() == genre.toLowerCase(),
+            );
           }).toList();
     }
     notifyListeners();

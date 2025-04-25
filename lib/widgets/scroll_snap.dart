@@ -12,13 +12,162 @@ class AnimeSlideList extends StatelessWidget {
   Widget build(BuildContext context) {
     final pageCount = (animeList.length / 3).ceil();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-        ),
-        CarouselSlider.builder(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 600) {
+          return GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 3,
+            ),
+            itemCount: animeList.length,
+            itemBuilder: (context, index) {
+              final anime = animeList[index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(anime: anime),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
+                        child: Image.network(
+                          anime.image,
+                          width: 100,
+                          height: 140,
+                          fit: BoxFit.cover,
+                          errorBuilder:
+                              (context, error, stackTrace) => Container(
+                                width: 100,
+                                height: 140,
+                                child: const Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                ),
+                              ),
+                        ),
+                      ),
+                      Container(
+                        width: 30,
+                        height: 140,
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${index + 1}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                anime.title,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                'Chapter: ${anime.chapter}',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.star,
+                                      size: 14,
+                                      color: Colors.amber,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      anime.rating.toString(),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6.0),
+                                child: Wrap(
+                                  spacing: 4,
+                                  runSpacing: 4,
+                                  children:
+                                      (anime.genre)
+                                          .take(5)
+                                          .map(
+                                            (genre) => Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 6,
+                                                    vertical: 2,
+                                                  ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              ),
+                                              child: Text(
+                                                genre,
+                                                style: const TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.blueGrey,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        }
+
+        // Jika lebar layar kecil, gunakan CarouselSlider dengan snap scroll
+        return CarouselSlider.builder(
           itemCount: pageCount,
           options: CarouselOptions(
             height: 560,
@@ -54,9 +203,8 @@ class AnimeSlideList extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Image
                             ClipRRect(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10),
                               ),
@@ -69,30 +217,26 @@ class AnimeSlideList extends StatelessWidget {
                                     (context, error, stackTrace) => Container(
                                       width: 100,
                                       height: 140,
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.error,
                                         color: Colors.red,
                                       ),
                                     ),
                               ),
                             ),
-
-                            // Ranking
                             Container(
                               width: 30,
                               height: 140,
                               alignment: Alignment.center,
                               child: Text(
                                 '${startIndex + pageItems.indexOf(anime) + 1}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
                               ),
                             ),
-
-                            // Content
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -102,14 +246,14 @@ class AnimeSlideList extends StatelessWidget {
                                   children: [
                                     Text(
                                       anime.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    SizedBox(height: 6),
+                                    const SizedBox(height: 6),
                                     Text(
                                       'Chapter: ${anime.chapter}',
                                       style: TextStyle(
@@ -121,12 +265,12 @@ class AnimeSlideList extends StatelessWidget {
                                       padding: const EdgeInsets.only(top: 4.0),
                                       child: Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.star,
                                             size: 14,
                                             color: Colors.amber,
                                           ),
-                                          SizedBox(width: 4),
+                                          const SizedBox(width: 4),
                                           Text(
                                             anime.rating.toString(),
                                             style: TextStyle(
@@ -148,7 +292,7 @@ class AnimeSlideList extends StatelessWidget {
                                                 .map(
                                                   (genre) => Container(
                                                     padding:
-                                                        EdgeInsets.symmetric(
+                                                        const EdgeInsets.symmetric(
                                                           horizontal: 6,
                                                           vertical: 2,
                                                         ),
@@ -161,7 +305,7 @@ class AnimeSlideList extends StatelessWidget {
                                                     ),
                                                     child: Text(
                                                       genre,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontSize: 10,
                                                         color: Colors.blueGrey,
                                                       ),
@@ -182,8 +326,8 @@ class AnimeSlideList extends StatelessWidget {
                   }).toList(),
             );
           },
-        ),
-      ],
+        );
+      },
     );
   }
 }

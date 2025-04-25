@@ -7,12 +7,14 @@ class Anime {
   String author;
   String image;
   List<String> genre;
+  String release;
   int chapter;
   int likes;
   int view;
 
   Anime({
     required this.id,
+    required this.release,
     required this.title,
     required this.rating,
     required this.status,

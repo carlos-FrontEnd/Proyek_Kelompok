@@ -16,6 +16,12 @@ class _ProfileAccountState extends State<ProfileAccount> {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
+    List<SvgPicture> icons = [
+      SvgPicture.asset('assets/discord.svg', height: 20),
+      SvgPicture.asset('assets/instagram.svg', height: 20),
+      SvgPicture.asset('assets/youtube.svg', height: 20),
+      SvgPicture.asset('assets/twitter.svg', height: 20),
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black26,
@@ -99,15 +105,34 @@ class _ProfileAccountState extends State<ProfileAccount> {
                       CustomListTile(title: 'Copyright'),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  SizedBox(height: 20),
+                  Column(
                     children: [
-                      SvgPicture.asset('assets/instagram.svg', height: 20),
-                      const SizedBox(width: 10),
-                      SvgPicture.asset('assets/twitter.svg', height: 20),
-                      const SizedBox(width: 10),
-                      SvgPicture.asset('assets/facebook.svg', height: 20),
-                      const SizedBox(width: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Wrap(
+                            runSpacing: 8,
+                            spacing: 8,
+                            children:
+                                icons.map((icon) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.black26,
+                                    ),
+                                    child: icon,
+                                  );
+                                }).toList(),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      const Text(
+                        'Follow us My Content',
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ],
                   ),
                 ],

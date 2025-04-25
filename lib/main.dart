@@ -31,7 +31,7 @@ final ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ), // Ganti bodyText1 dengan bodyLarge
     bodyMedium: TextStyle(color: Colors.white),
-  ),
+  ),      
 );
 
 void main() {
