@@ -11,7 +11,18 @@ class AnimeGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final crossAxisCount = screenWidth > 700 ? 5 : 2;
+    final AspectRatio =
+        screenWidth >= 1000
+            ? 1.5
+            : screenWidth >= 600
+            ? 1.2
+            : 0.7;
+    final crossAxisCount =
+        screenWidth >= 1000
+            ? 7
+            : screenWidth >= 600
+            ? 4
+            : 2;
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -22,7 +33,7 @@ class AnimeGrid extends StatelessWidget {
           crossAxisCount: crossAxisCount,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          childAspectRatio: 0.7,
+          childAspectRatio: AspectRatio,
         ),
         itemCount: animeList.length,
         itemBuilder: (context, index) {
